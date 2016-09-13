@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.1.1
+/*! AlphabetSearch for DataTables v1.1.2
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -220,7 +220,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 	context.oLanguage.alphabetSearch =
 		$.extend(
 			{
-				'alphabet': '#ABCDEFGHIJKLMNOPQRSTUVXYZ',
+				'alphabet': '#ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 				'infoDisplay': 'Display',
 				'infoAll': 'All'
 			},
