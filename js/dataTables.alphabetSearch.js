@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.1.2
+/*! AlphabetSearch for DataTables v1.1.3
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -49,6 +49,11 @@ $.fn.dataTable.Api.register( 'alphabetSearch.recalc()', function ( searchTerm ) 
 
 // Search plug-in
 $.fn.dataTable.ext.search.push( function ( context, searchData ) {
+   // Ensure that table has alphabet search feature enabled
+   if ( ! context.hasOwnProperty('alphabetSearch') ) { 
+      return true; 
+   }
+
 	// Ensure that there is a search applied to this table before running it
 	if ( ! context.alphabetSearch.letterSearch ) {
 		return true;
