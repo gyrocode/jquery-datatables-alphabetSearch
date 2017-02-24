@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.1.3
+/*! AlphabetSearch for DataTables v1.1.4
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.1.1
+ * @version     1.1.4
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -156,12 +156,17 @@ function bin ( data ) {
 function draw ( table, alphabet, context )
 {
 	alphabet.empty();
-	alphabet.append( context.oLanguage.alphabetSearch.infoDisplay + ': ' );
+
+	if(context.oLanguage.alphabetSearch.infoDisplay !== ''){
+		$('<span class="alphabet_info_display"></span>')
+			.html(context.oLanguage.alphabetSearch.infoDisplay)
+			.appendTo( alphabet );
+	}
 
 	var columnData = table.column(context.alphabetSearch.column, { search: 'applied' } ).data();
 	var bins = bin( columnData );
 
-	$('<span class="alphabet-clear' + ((!context.alphabetSearch.letter) ? ' active' : '') + '"/>')
+	$('<span class="alphabet_letter' + ((!context.alphabetSearch.letter) ? ' active' : '') + '"/>')
 		.data( 'letter', '' )
 		.data( 'match-count', columnData.length )
 		.html( context.oLanguage.alphabetSearch.infoAll )
@@ -174,7 +179,8 @@ function draw ( table, alphabet, context )
 			.data( 'letter', letter )
 			.data( 'match-count', bins[letter] || 0 )
 			.addClass(
-				(! bins[letter] ? 'empty' : '')
+			   'alphabet_letter'
+				+ (! bins[letter] ? ' empty' : '')
 				+ ((context.alphabetSearch.letter === letter) ? ' active' : '')
 			)
 			.html(
@@ -226,7 +232,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 		$.extend(
 			{
 				'alphabet': '#ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-				'infoDisplay': 'Display',
+				'infoDisplay': 'Display:',
 				'infoAll': 'All'
 			},
 			((context.oLanguage.alphabetSearch)
@@ -293,7 +299,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 
 	// Trigger a search
-	alphabet.on( 'click', 'span', function () {
+	alphabet.on( 'click', 'span.alphabet_letter', function () {
 		alphabet.find( '.active' ).removeClass( 'active' );
 		$(this).addClass( 'active' );
 
@@ -304,7 +310,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 	// Mouse events to show helper information
 	alphabet
-		.on( 'mouseenter', 'span', function () {
+		.on( 'mouseenter', 'span.alphabet_letter', function () {
 			alphabet
 				.find('div.alphabet_info')
 				.css( {
@@ -314,7 +320,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 				} )
 				.html( $(this).data('match-count') );
 		} )
-		.on( 'mouseleave', 'span', function () {
+		.on( 'mouseleave', 'span.alphabet_letter', function () {
 			alphabet
 				.find('div.alphabet_info')
 				.css('opacity', 0);
