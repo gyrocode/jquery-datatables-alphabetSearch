@@ -1,8 +1,8 @@
-jQuery DataTables Alphabetical Search
+jQuery DataTables AlphabetSearch
 =====================================
 
 AlphabetSearch is a feature plug-in for the jQuery DataTables library
-that provides alphabetical search feature.
+that provides A-Z alphabetical search feature.
 
 More information and examples is available at
 [gyrocode.com/projects/jquery-datatables-alphabetsearch](https://www.gyrocode.com/projects/jquery-datatables-alphabetsearch/).
