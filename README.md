@@ -5,7 +5,7 @@ AlphabetSearch is a feature plug-in for the jQuery DataTables library
 that provides alphabetical search feature.
 
 More information and examples is available at
-[gyrocode.com/articles/jquery-datatables-alphabetical-search](http://www.gyrocode.com/articles/jquery-datatables-alphabetical-search/).
+[gyrocode.com/projects/jquery-datatables-alphabetsearch](https://www.gyrocode.com/projects/jquery-datatables-alphabetsearch/).
 
 
 How to use
@@ -25,7 +25,7 @@ Copyright
 ---------
 
 * SpryMedia Limited, [datatables.net](http://datatables.net)
-* Gyrocode, [gyrocode.com](http://www.gyrocode.com)
+* Gyrocode, [gyrocode.com](https://www.gyrocode.com)
 
 
 License
