@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.1.4
+/*! AlphabetSearch for DataTables v1.2.0-dev
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.1.4
+ * @version     1.2.0-dev
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -19,7 +19,7 @@
  * License      MIT - http://datatables.net/license/mit
  *
  * For more detailed information please see:
- *     http://www.gyrocode.com/articles/jquery-datatables-alphabetical-search
+ * https://www.gyrocode.com/projects/jquery-datatables-alphabetsearch/
  */
 (function(){
 
@@ -50,8 +50,8 @@ $.fn.dataTable.Api.register( 'alphabetSearch.recalc()', function ( searchTerm ) 
 // Search plug-in
 $.fn.dataTable.ext.search.push( function ( context, searchData ) {
    // Ensure that table has alphabet search feature enabled
-   if ( ! context.hasOwnProperty('alphabetSearch') ) { 
-      return true; 
+   if ( ! context.hasOwnProperty('alphabetSearch') ) {
+      return true;
    }
 
 	// Ensure that there is a search applied to this table before running it
@@ -166,25 +166,29 @@ function draw ( table, alphabet, context )
 	var columnData = table.column(context.alphabetSearch.column, { search: 'applied' } ).data();
 	var bins = bin( columnData );
 
-	$('<span class="alphabet_letter' + ((!context.alphabetSearch.letter) ? ' active' : '') + '"/>')
+	$('<a/>')
+		.attr( 'href', 'javascript:;' )
 		.data( 'letter', '' )
 		.data( 'match-count', columnData.length )
+		.addClass(
+		   ((!context.alphabetSearch.letter) ? 'active' : '')
+		)
 		.html( context.oLanguage.alphabetSearch.infoAll )
 		.appendTo( alphabet );
 
 	for ( var i=0 ; i<context.oLanguage.alphabetSearch.alphabet.length ; i++ ) {
 		var letter = context.oLanguage.alphabetSearch.alphabet[i];
 
-		$('<span/>')
+		$('<a/>')
+			.attr( 'href', 'javascript:;' )
 			.data( 'letter', letter )
 			.data( 'match-count', bins[letter] || 0 )
 			.addClass(
-			   'alphabet_letter'
-				+ (! bins[letter] ? ' empty' : '')
+				(! bins[letter] ? 'empty' : '')
 				+ ((context.alphabetSearch.letter === letter) ? ' active' : '')
 			)
 			.html(
-				(letter === '#') ? '0-9' : letter
+				letter
 			)
 			.appendTo( alphabet );
 	}
@@ -299,7 +303,10 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 
 	// Trigger a search
-	alphabet.on( 'click', 'span.alphabet_letter', function () {
+	alphabet.on( 'click', 'a', function (e) {
+	   // Prevent default behavior
+	   e.preventDefault();
+
 		alphabet.find( '.active' ).removeClass( 'active' );
 		$(this).addClass( 'active' );
 
@@ -310,17 +317,23 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 	// Mouse events to show helper information
 	alphabet
-		.on( 'mouseenter', 'span.alphabet_letter', function () {
-			alphabet
-				.find('div.alphabet_info')
+		.on( 'mouseenter', 'a', function () {
+		   var $el = $(this);
+			var el_pos = $el.position();
+
+			var $alphabet_info = $('.alphabet_info', alphabet);
+
+			$alphabet_info.html( $el.data('match-count') );
+
+			// Display helper centered horizontally under the letter
+			$alphabet_info
 				.css( {
 					opacity: 1,
-					left: $(this).position().left,
-					width: $(this).width()
-				} )
-				.html( $(this).data('match-count') );
+					left: el_pos.left + Math.round(($el.outerWidth() - $alphabet_info.outerWidth())/2),
+					top: $(this).position().top + $el.outerHeight()
+				} );
 		} )
-		.on( 'mouseleave', 'span.alphabet_letter', function () {
+		.on( 'mouseleave', 'a', function () {
 			alphabet
 				.find('div.alphabet_info')
 				.css('opacity', 0);
@@ -349,7 +362,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 		// If there are no rows found and letter is selected
 		if(!rows.length && context.alphabetSearch){
-			var letter = (context.alphabetSearch.letter === '#') ? '0-9' : context.alphabetSearch.letter;
+			var letter = context.alphabetSearch.letter;
 
 			$(api.table().body()).prepend(
 				'<tr class="alphabet_group"><td colspan="' + col_total + '">' + letter + '</td></tr>'

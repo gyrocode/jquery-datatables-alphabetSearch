@@ -1,45 +1,46 @@
 div.alphabet {
 	position: relative;
-	display: table;
-	width: 100%;
-	margin-bottom: 1em;
+	margin-bottom: 1.4em;
 }
 
-div.alphabet span.alphabet_letter {
-	display: table-cell;
-	color: #3174c7;
+div.alphabet a {
+   box-sizing: content-box;
+	display: inline-block;
 	cursor: pointer;
 	text-align: center;
-	width: 3.5%;
+	text-decoration: none;
+	min-width: 1.3em;
+	padding: 0 0.2em;
+	opacity: 0.8;
 }
 
-div.alphabet span.alphabet_letter:hover {
-	text-decoration: underline;
+div.alphabet a.active {
+	opacity: 1;
+	font-weight: bold;
 }
 
-div.alphabet span.active {
-	color: black;
+div.alphabet a.empty {
+	opacity: 0.3;
 }
 
-div.alphabet span.empty {
-	color: red;
+div.alphabet a.empty.active {
+	opacity: 1;
 }
 
-div.alphabet_info_display {
-	padding-right: 1em;
+div.alphabet .alphabet_info_display {
+	padding: 0 0.5em 0 0;
 }
 
-div.alphabet_info {
-	display: block;
+div.alphabet div.alphabet_info {
 	position: absolute;
 	background-color: #111;
 	border-radius: 3px;
-	color: white;
-	top: 2em;
-	height: 1.8em;
-	padding-top: 0.4em;
+	color: #FFF;
+	margin-top: 0.2em;
+	padding: 0.2em 0.4em;
 	text-align: center;
-	z-index: 1;
+	opacity: 0;
+   transition: opacity .4s ease-in-out;
 }
 
 tr.alphabet_group, tr.alphabet_group:hover {
