@@ -5,7 +5,7 @@ div.alphabet {
 	margin-bottom: 1em;
 }
 
-div.alphabet span {
+div.alphabet span.alphabet_letter {
 	display: table-cell;
 	color: #3174c7;
 	cursor: pointer;
@@ -13,7 +13,7 @@ div.alphabet span {
 	width: 3.5%;
 }
 
-div.alphabet span:hover {
+div.alphabet span.alphabet_letter:hover {
 	text-decoration: underline;
 }
 
@@ -23,6 +23,10 @@ div.alphabet span.active {
 
 div.alphabet span.empty {
 	color: red;
+}
+
+div.alphabet_info_display {
+	padding-right: 1em;
 }
 
 div.alphabet_info {
