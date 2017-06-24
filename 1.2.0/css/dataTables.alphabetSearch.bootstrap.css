@@ -1,0 +1,47 @@
+div.alphabet {
+   position: relative;
+   margin-bottom: 1.4em;
+}
+
+div.alphabet ul {
+   margin: 0;
+}
+
+div.alphabet a span {
+   opacity: 0.8;
+}
+
+div.alphabet a.active span {
+   opacity: 1;
+   font-weight: bold;
+}
+
+div.alphabet a.empty span {
+   opacity: 0.3;
+}
+
+div.alphabet a.empty.active span {
+   opacity: 1;
+}
+
+div.alphabet .alphabet-info-display {
+   vertical-align: top;
+   margin-right: 0.5em;
+}
+
+div.alphabet div.alphabet-info {
+   position: absolute;
+   background-color: #111;
+   border-radius: 3px;
+   color: #FFF;
+   margin-top: 0.2em;
+   padding: 0.2em 0.4em;
+   text-align: center;
+   opacity: 0;
+   transition: opacity .4s ease-in-out;
+   z-index:9999;
+}
+
+tr.alphabet-group, tr.alphabet-group:hover {
+   background-color: rgba(0,0,0,0.15) !important;
+}
