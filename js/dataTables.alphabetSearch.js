@@ -49,10 +49,10 @@ $.fn.dataTable.Api.register( 'alphabetSearch.recalc()', function ( searchTerm ) 
 
 // Search plug-in
 $.fn.dataTable.ext.search.push( function ( context, searchData ) {
-   // Ensure that table has alphabet search feature enabled
-   if ( ! context.hasOwnProperty('alphabetSearch') ) {
-      return true;
-   }
+	// Ensure that table has alphabet search feature enabled
+	if ( ! context.hasOwnProperty('alphabetSearch') ) {
+		return true;
+	}
 
 	// Ensure that there is a search applied to this table before running it
 	if ( ! context.alphabetSearch.letterSearch ) {
@@ -85,7 +85,7 @@ $.fn.dataTable.ext.search.push( function ( context, searchData ) {
 // there would be two calls to this method
 $.fn.dataTable.ext.order['alphabetSearch'] = function  ( context, col )
 {
-	var order_col    = this.api().order()[0][0];
+	var order_col = this.api().order()[0][0];
 	var order_method = this.api().order()[0][1];
 
 	// If sorting by column other than the one being alphabetized
@@ -158,7 +158,7 @@ function draw ( table, alphabet, context )
 	alphabet.empty();
 
 	if(context.oLanguage.alphabetSearch.infoDisplay !== ''){
-		$('<span class="alphabet_info_display"></span>')
+		$('<span class="alphabet-info-display"></span>')
 			.html(context.oLanguage.alphabetSearch.infoDisplay)
 			.appendTo( alphabet );
 	}
@@ -166,15 +166,19 @@ function draw ( table, alphabet, context )
 	var columnData = table.column(context.alphabetSearch.column, { search: 'applied' } ).data();
 	var bins = bin( columnData );
 
+	var alphabetList = $('<ul/>');
+
 	$('<a/>')
 		.attr( 'href', 'javascript:;' )
 		.data( 'letter', '' )
 		.data( 'match-count', columnData.length )
 		.addClass(
-		   ((!context.alphabetSearch.letter) ? 'active' : '')
+			((!context.alphabetSearch.letter) ? 'active' : '')
 		)
-		.html( context.oLanguage.alphabetSearch.infoAll )
-		.appendTo( alphabet );
+		.html( '<span>' + context.oLanguage.alphabetSearch.infoAll + '</span>' )
+		.wrap( '<li/>' )
+		.parent()
+		.appendTo( alphabetList );
 
 	for ( var i=0 ; i<context.oLanguage.alphabetSearch.alphabet.length ; i++ ) {
 		var letter = context.oLanguage.alphabetSearch.alphabet[i];
@@ -187,13 +191,15 @@ function draw ( table, alphabet, context )
 				(! bins[letter] ? 'empty' : '')
 				+ ((context.alphabetSearch.letter === letter) ? ' active' : '')
 			)
-			.html(
-				letter
-			)
-			.appendTo( alphabet );
+			.html( '<span>' + letter + '</span>' )
+			.wrap( '<li/>' )
+			.parent()
+			.appendTo( alphabetList );
 	}
 
-	$('<div class="alphabet_info"></div>')
+	alphabetList.appendTo( alphabet );
+
+	$('<div class="alphabet-info"></div>')
 		.appendTo( alphabet );
 
 
@@ -304,8 +310,8 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 	// Trigger a search
 	alphabet.on( 'click', 'a', function (e) {
-	   // Prevent default behavior
-	   e.preventDefault();
+		// Prevent default behavior
+		e.preventDefault();
 
 		alphabet.find( '.active' ).removeClass( 'active' );
 		$(this).addClass( 'active' );
@@ -318,10 +324,10 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 	// Mouse events to show helper information
 	alphabet
 		.on( 'mouseenter', 'a', function () {
-		   var $el = $(this);
+			var $el = $(this);
 			var el_pos = $el.position();
 
-			var $alphabet_info = $('.alphabet_info', alphabet);
+			var $alphabet_info = $('.alphabet-info', alphabet);
 
 			$alphabet_info.html( $el.data('match-count') );
 
@@ -335,7 +341,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 		} )
 		.on( 'mouseleave', 'a', function () {
 			alphabet
-				.find('div.alphabet_info')
+				.find('div.alphabet-info')
 				.css('opacity', 0);
 		} );
 
@@ -353,7 +359,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 
 			if (group_last !== group) {
 				$(rows).eq(index).before(
-					'<tr class="alphabet_group"><td colspan="' + col_total + '">' + group + '</td></tr>'
+					'<tr class="alphabet-group"><td colspan="' + col_total + '">' + group + '</td></tr>'
 				);
 
 				group_last = group;
@@ -365,7 +371,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 			var letter = context.alphabetSearch.letter;
 
 			$(api.table().body()).prepend(
-				'<tr class="alphabet_group"><td colspan="' + col_total + '">' + letter + '</td></tr>'
+				'<tr class="alphabet-group"><td colspan="' + col_total + '">' + letter + '</td></tr>'
 			);
 		}
 	});

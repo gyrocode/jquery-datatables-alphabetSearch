@@ -4,24 +4,7 @@ div.alphabet {
 }
 
 div.alphabet ul {
-   display: inline-block;
    margin: 0;
-   padding: 0;
-   list-style: none;
-}
-
-div.alphabet li {
-   display: inline-block;
-}
-
-div.alphabet a {
-   box-sizing: content-box;
-   display: inline-block;
-   cursor: pointer;
-   text-align: center;
-   text-decoration: none;
-   min-width: 1.3em;
-   padding: 0 0.2em;
 }
 
 div.alphabet a span {
@@ -42,6 +25,7 @@ div.alphabet a.empty.active span {
 }
 
 div.alphabet .alphabet-info-display {
+   vertical-align: top;
    margin-right: 0.5em;
 }
 
@@ -55,7 +39,7 @@ div.alphabet div.alphabet-info {
    text-align: center;
    opacity: 0;
    transition: opacity .4s ease-in-out;
-   z-index: 9999;
+   z-index:9999;
 }
 
 tr.alphabet-group, tr.alphabet-group:hover {
