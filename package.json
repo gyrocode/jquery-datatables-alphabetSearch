@@ -1,0 +1,30 @@
+{
+  "name": "jquery-datatables-alphabetsearch",
+  "version": "1.2.0",
+  "description": "AlphabetSearch is a feature plug-in for the jQuery DataTables library that provides A-Z alphabetical search feature.",
+  "main": "./js/dataTables.alphabetSearch.js",
+  "keywords": [
+    "jQuery",
+    "DataTables",
+    "alphabet",
+    "alphabetical",
+    "a-z"
+  ],
+  "author": {
+    "name": "Gyrocode",
+    "url": "https://www.gyrocode.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gyrocode/jquery-datatables-alphabetSearch/issues"
+  },
+  "homepage": "https://www.gyrocode.com/projects/jquery-datatables-alphabetsearch/",
+  "dependencies": {
+    "jquery": ">=1.7",
+    "datatables.net": ">=1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gyrocode/jquery-datatables-alphabetSearch.git"
+  }
+}
