@@ -1,63 +1,66 @@
 div.alphabet {
-   position: relative;
-   margin-bottom: 1.4em;
+	position:relative;
+	margin-bottom:1em;
+}
+
+@media screen and (max-width:767px){
+	div.alphabet {
+		text-align:center;
+	}
 }
 
 div.alphabet ul {
-   display: inline-block;
-   margin: 0;
-   padding: 0;
-   list-style: none;
+	display:inline-block;
+	margin:0;
+	padding:0;
+	list-style:none;
 }
 
 div.alphabet li {
-   display: inline-block;
+	display:inline-block;
 }
 
 div.alphabet a {
-   box-sizing: content-box;
-   display: inline-block;
-   cursor: pointer;
-   text-align: center;
-   text-decoration: none;
-   min-width: 1.3em;
-   padding: 0 0.2em;
+	display:inline-block;
+	cursor:pointer;
+	text-align:center;
+	text-decoration:none;
+	min-width:1.3em;
 }
 
 div.alphabet a span {
-   opacity: 0.8;
+	opacity:1;
 }
 
 div.alphabet a.active span {
-   opacity: 1;
-   font-weight: bold;
+	font-weight:bold;
 }
 
 div.alphabet a.empty span {
-   opacity: 0.3;
+	opacity:0.3;
 }
 
 div.alphabet a.empty.active span {
-   opacity: 1;
+	opacity:1;
 }
 
 div.alphabet .alphabet-info-display {
-   margin-right: 0.5em;
+	margin-right:0.5em;
 }
 
 div.alphabet div.alphabet-info {
-   position: absolute;
-   background-color: #111;
-   border-radius: 3px;
-   color: #FFF;
-   margin-top: 0.2em;
-   padding: 0.2em 0.4em;
-   text-align: center;
-   opacity: 0;
-   transition: opacity .4s ease-in-out;
-   z-index: 9999;
+	position:absolute;
+	background-color:#111;
+	border-radius:3px;
+	color:#FFF;
+	margin-top:0.2em;
+	padding:0.2em 0.4em;
+	text-align:center;
+	opacity:0;
+	transition:opacity .4s ease-in-out;
+	z-index:9999;
 }
 
 tr.alphabet-group, tr.alphabet-group:hover {
-   background-color: rgba(0,0,0,0.15) !important;
+	background-color:rgba(0,0,0,0.15) !important;
 }
