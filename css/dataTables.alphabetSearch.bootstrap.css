@@ -1,6 +1,7 @@
 div.alphabet {
+   clear:both;
 	position:relative;
-	margin-bottom:1em;
+	margin:0.5em 0;
 }
 
 @media screen and (max-width:767px){
