@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.2.2
+/*! AlphabetSearch for DataTables v1.2.3
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.2.2
+ * @version     1.2.3
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -355,7 +355,7 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 		var group_last = null;
 
 		api.column(context.alphabetSearch.column, { page: 'current' }).data().each(function (name, index){
-			var group = name.charAt(0).toUpperCase();
+			var group = name.replace(/<.*?>/g, '').charAt(0).toUpperCase();
 
 			if (group_last !== group) {
 				$(rows).eq(index).before(
