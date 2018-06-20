@@ -1,6 +1,6 @@
 {
   "name": "jquery-datatables-alphabetsearch",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "AlphabetSearch is a feature plug-in for the jQuery DataTables library that provides A-Z alphabetical search feature.",
   "main": "./js/dataTables.alphabetSearch.js",
   "keywords": [
