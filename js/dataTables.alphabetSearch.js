@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.2.3
+/*! AlphabetSearch for DataTables v1.2.4
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.2.3
+ * @version     1.2.4
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -94,28 +94,29 @@ $.fn.dataTable.ext.order['alphabetSearch'] = function  ( context, col )
 	}
 
 	var data = this.api().column( col, { order: 'index' } ).data().map( function (value, index) {
+		var letter = value.replace(/<.*?>/g, '').charAt(0).toUpperCase();
+
 		// If sorting by alphabetized column
 		return (order_col === context.alphabetSearch.column)
-			? (
-				// If first pass
-				( !context.alphabetSearch.pass )
-					// Ignore
-					?
-						''
-					// Otherwise, if it's a second pass
-					:
-						(
-							// If method is ascending sort
-							( order_method === 'asc' )
-								// Return first letter
-								? value.charAt(0)
-								: String.fromCharCode(65535 - value.charCodeAt(0))
-						)
-			)
-			// Otherwise, if sorting by column other than the one being alphabetized,
-			// return first letter
-			: value.charAt(0);
-
+		? (
+			// If first pass
+			( !context.alphabetSearch.pass )
+				// Ignore
+				?
+					''
+				// Otherwise, if it's a second pass
+				:
+					(
+					// If method is ascending sort
+					( order_method === 'asc' )
+						// Return first letter
+						? letter
+						: String.fromCharCode(65535 - letter.charCodeAt(0))
+					)
+		)
+		// Otherwise, if sorting by column other than the one being alphabetized,
+		// return first letter
+		: letter;
 	} );
 
 	// If sorting by alphabetized column
