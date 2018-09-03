@@ -1,6 +1,6 @@
 /*! AlphabetSearch for DataTables v1.2.5
  * 2014 SpryMedia Ltd - datatables.net/license
- * Gyrocode - MIT License
+ * Gyrocode LLC - MIT License
  */
 
 /**
@@ -12,9 +12,9 @@
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2014 SpryMedia Ltd.
- * @author      Gyrocode (www.gyrocode.com)
+ * @author      Gyrocode LLC (www.gyrocode.com)
  * @contact     www.gyrocode.com/contacts
- * @copyright   Copyright (c) Gyrocode
+ * @copyright   Copyright (c) Gyrocode LLC
  *
  * License      MIT - http://datatables.net/license/mit
  *
