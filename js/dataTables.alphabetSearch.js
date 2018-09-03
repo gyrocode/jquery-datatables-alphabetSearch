@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.2.4
+/*! AlphabetSearch for DataTables v1.2.5
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.2.4
+ * @version     1.2.5
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -21,7 +21,7 @@
  * For more detailed information please see:
  * https://www.gyrocode.com/projects/jquery-datatables-alphabetsearch/
  */
-(function(){
+(function($){
 
 
 // Search function
@@ -396,4 +396,4 @@ $.fn.dataTable.ext.feature.push( {
 } );
 
 
-}());
+}(jQuery));
