@@ -1,4 +1,4 @@
-/*! AlphabetSearch for DataTables v1.2.5
+/*! AlphabetSearch for DataTables v1.2.6-dev
  * 2014 SpryMedia Ltd - datatables.net/license
  * Gyrocode LLC - MIT License
  */
@@ -7,7 +7,7 @@
  * @summary     AlphabetSearch
  * @description Show an set of alphabet buttons alongside a table providing
  *     search input options
- * @version     1.2.5
+ * @version     1.2.6-dev
  * @file        dataTables.alphabetSearch.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -225,7 +225,7 @@ function draw ( table, alphabet, context )
 	// when alphabet panel has been drawn
 	// because we are performing two-step rendering
 	// that could trigger search hanlder when not needed
-	table.one('search', function (e, context) {
+	table.one('search.dt.dtAlphabetSearch', function (e, context) {
 		var api = new $.fn.dataTable.Api( context );
 
 		// Redraw alphabet panel
@@ -346,7 +346,8 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 				.css('opacity', 0);
 		} );
 
-	table.on('draw', function (e, context) {
+	// Handle table draw event
+	table.on('draw.dt.dtAlphabetSearch', function (e, context) {
 		var api = new $.fn.dataTable.Api( context );
 
 		// Total number of column nodes
@@ -375,6 +376,12 @@ $.fn.dataTable.AlphabetSearch = function ( context ) {
 				'<tr class="alphabet-group"><td colspan="' + col_total + '">' + letter + '</td></tr>'
 			);
 		}
+	});
+
+	// Handle table destroy event
+	table.on('destroy.dt.dtAlphabetSearch', function(e, context){
+		var api = new $.fn.dataTable.Api( context );
+		api.off('.dtAlphabetSearch');
 	});
 
 	// API method to get the alphabet container node
