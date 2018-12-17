@@ -81,46 +81,59 @@ $.fn.dataTable.ext.search.push( function ( context, searchData ) {
 
 // Order plug-in
 //
-// NOTES: If sorting by alphabetized column
-// there would be two calls to this method
+// NOTE: If sorting by alphabetized column there would be two calls to this method.
 $.fn.dataTable.ext.order['alphabetSearch'] = function  ( context, col )
 {
-   var order_col = this.api().order()[0][0];
-   var order_method = this.api().order()[0][1];
+   var orderColumn = this.api().order()[0][0];
+   var orderMethod = this.api().order()[0][1];
 
    // If sorting by column other than the one being alphabetized
-   if(order_col !== context.alphabetSearch.column){
+   if(orderColumn !== context.alphabetSearch.column){
       context.alphabetSearch.pass = 0;
    }
 
    var data = this.api().column( col, { order: 'index' } ).data().map( function (value, index) {
-      var letter = value.toString().replace(/<.*?>/g, '').charAt(0).toUpperCase();
+      var text = value.toString().replace(/<.*?>/g, '');
+      var letter = text.charAt(0).toUpperCase();
 
       // If sorting by alphabetized column
-      return (order_col === context.alphabetSearch.column)
-      ? (
-         // If first pass
-         ( !context.alphabetSearch.pass )
+      if(orderColumn === context.alphabetSearch.column) {
+
+         // If this is a first pass
+         if(context.alphabetSearch.pass === 0){
             // Ignore
-            ?
-               ''
-            // Otherwise, if it's a second pass
-            :
-               (
-               // If method is ascending sort
-               ( order_method === 'asc' )
-                  // Return first letter
-                  ? letter
-                  : String.fromCharCode(65535 - letter.charCodeAt(0))
-               )
-      )
+            return '';
+
+         // Otherwise, if this is a second pass
+         } else {
+            // When sorting in ascending order
+            if(orderMethod === 'asc'){
+               // Return actual content
+               return text;
+
+            // Otherwise, when sorting in descending order
+            } else {
+               // Create identical string with mirrored first character.
+               // This will force DataTables to sort group of rows by first letter in descending order
+               // but preserve ascending order within each group.
+               var textReversed = '';
+               for(var i = 0; i < text.length; i++){
+                  textReversed += (i) ? text.charAt(i) : String.fromCharCode(65535 - text.charCodeAt(i));
+               }
+
+               return textReversed;
+            }
+         }
+
       // Otherwise, if sorting by column other than the one being alphabetized,
-      // return first letter
-      : letter;
+      } else {
+         // Return first letter only
+         return letter;
+      }
    } );
 
    // If sorting by alphabetized column
-   if(order_col === context.alphabetSearch.column){
+   if(orderColumn === context.alphabetSearch.column){
       // If pass is not defined, set it to 0
       if(!context.alphabetSearchPass){ context.alphabetSearch.pass = 0; }
       // Increment pass counter and reset it to 0 if it's a second pass
