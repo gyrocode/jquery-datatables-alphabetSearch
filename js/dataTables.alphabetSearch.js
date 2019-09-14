@@ -107,18 +107,39 @@ $.fn.dataTable.ext.order['alphabetSearch'] = function  ( context, col )
          // Otherwise, if this is a second pass
          } else {
             // When sorting in ascending order
-            if(orderMethod === 'asc'){
+            if (orderMethod === 'asc'){
                // Return actual content
                return text;
 
             // Otherwise, when sorting in descending order
             } else {
-               // Create identical string with mirrored first character.
-               // This will force DataTables to sort group of rows by first letter in descending order
-               // but preserve ascending order within each group.
                var textReversed = '';
-               for(var i = 0; i < text.length; i++){
-                  textReversed += (i) ? text.charAt(i) : String.fromCharCode(65535 - text.charCodeAt(i));
+
+               // If letter search is applied to the table
+               if(context.alphabetSearch.letterSearch) {
+                  // Reverse (take characters from the oposite side of the character table) all characters.
+                  //
+                  // NOTE: Allows to sort alphabetized column in descending order
+                  // by returning reversed text
+                  // to compensate fixed ascending order applied during initialization.
+                  //
+                  // TODO: Better solution would be to find a way to manipulate first element
+                  // of the context.aaSortingFixed array before each sort.
+
+                  for(var i = 0; i < text.length; i++){
+                     textReversed += String.fromCharCode(65535 - text.charCodeAt(i));
+                  }
+
+               // Otherwise, if letter search is not applied to the table
+               } else {
+                  // Reverse (take characters from the oposite side of the character table) first character.
+                  //
+                  // NOTE: Allows to sort group of rows by first letter in descending order
+                  // but preserve ascending order within each group.
+
+                  for(var i = 0; i < text.length; i++){
+                     textReversed += (i) ? text.charAt(i) : String.fromCharCode(65535 - text.charCodeAt(i));
+                  }
                }
 
                return textReversed;
