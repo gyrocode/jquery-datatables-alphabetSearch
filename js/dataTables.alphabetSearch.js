@@ -135,7 +135,7 @@ $.fn.dataTable.ext.order['alphabetSearch'] = function  ( context, col )
    // If sorting by alphabetized column
    if(orderColumn === context.alphabetSearch.column){
       // If pass is not defined, set it to 0
-      if(!context.alphabetSearchPass){ context.alphabetSearch.pass = 0; }
+      if(!context.alphabetSearch.pass){ context.alphabetSearch.pass = 0; }
       // Increment pass counter and reset it to 0 if it's a second pass
       context.alphabetSearch.pass = (context.alphabetSearch.pass + 1) % 2;
    }
